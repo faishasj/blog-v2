@@ -86,13 +86,13 @@ td, th {
 
 blockquote {
   border-left: 10px solid var(--accentColor1);
-  padding: 10px 20px;
-  background-color: var(--codeBg);
-  margin-left: 0;
   margin-right: 0;
-  color: var(--lightTextColor);
-  font-size: 0.9rem;
+  margin-left: 0;
+  background-color: var(--codeBg);
+  padding: 10px 20px;
   font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--lightTextColor);
 }
 
 hr {
@@ -100,8 +100,8 @@ hr {
 }
 
 .background {
-  position: fixed;
   z-index: -1;
+  position: fixed;
 }
 
 .siteContainer {
@@ -122,26 +122,61 @@ hr {
   color: var(--textColor);
 }
 
-.themeToggler {
-  font-size: 2rem;
+.themeSwitch {
+  position: relative;
+  height: 20px;
+  width: 70px;
   cursor: pointer;
-  user-select: none;
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.themeSwitch input {
+  z-index: 2;
+  position: absolute;
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+}
+
+.themeSwitch input:focus {
+  outline: none;
+}
+
+.themeSwitch label {
+  display: block;
+  border-radius: 10px;
+  background: var(--lineColor);
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.themeSwitch input + .emoji::before {
+  z-index: 1;
+  position: absolute;
+  top: -23px;
+  left: 0;
+  content: "🌞";
+  font-size: 40px;
+  transition: 0.2s;
+}
+
+.themeSwitch input:checked + .emoji::before {
+  left: 100%;
+  content: "🌚";
+  margin-left: -1em;
 }
 
 .siteNavigation {
-  display: flex;
   position: relative;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  direction: row;
-  width: 18rem;
-  font-family: "IBM Plex Mono", monospace;
+  min-width: 20rem;
   text-transform: lowercase;
+  direction: row;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .siteNavigation a {
@@ -153,9 +188,9 @@ hr {
 }
 
 .postPreviewArticle {
+  border-bottom: 1px solid var(--lineColor);
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--lineColor);
 }
 
 .postPreviewExcerpt {

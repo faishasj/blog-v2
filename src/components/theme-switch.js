@@ -6,15 +6,16 @@ const ThemeSwitch = () => {
   return (
     <ThemeToggler>
     {({ theme, toggleTheme }) => (
-      <div
-        className="themeToggler"
-        onClick={e => toggleTheme(theme === 'light' ? 'dark' : 'light')}
-      >
-        {theme === 'light' ? (
-          <>🌚</>
-        ) : (
-          <>🌞</>
-        )}
+      <div className="themeSwitch">
+        <input
+          type="checkbox"
+          id="darkmode"
+          aria-label="darkmode"
+          onChange={e => toggleTheme(e.target.checked ? 'dark' : 'light')}
+          checked={theme === 'dark'}
+        />
+        <div className="emoji"/>
+        <label htmlFor="darkmode" className="themeSwitchLabel"/>
       </div>
     )}
     </ThemeToggler>

@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SEO = ({ description, lang, meta, title, thumbnail }) => {
+const SEO = ({ description, lang, meta, slug, title, thumbnail }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -18,6 +18,7 @@ const SEO = ({ description, lang, meta, title, thumbnail }) => {
           siteMetadata {
             title
             description
+            siteUrl
             social {
               twitter
             }
@@ -27,7 +28,8 @@ const SEO = ({ description, lang, meta, title, thumbnail }) => {
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = description || site.siteMetadata.description;
+  const thumbnailSrc = thumbnail && thumbnail.childImageSharp.sizes.src;
 
   return (
     <Helmet
@@ -43,7 +45,7 @@ const SEO = ({ description, lang, meta, title, thumbnail }) => {
         },
         { 
           name: `image`,
-          content: thumbnail,
+          content: site.siteMetadata.siteUrl + thumbnailSrc,
         },
         {
           property: `og:title`,
@@ -54,12 +56,16 @@ const SEO = ({ description, lang, meta, title, thumbnail }) => {
           content: metaDescription,
         },
         {
-          property: `og:type`,
-          content: `website`,
+          property: `og:image`,
+          content: site.siteMetadata.siteUrl + thumbnailSrc,
         },
         {
-          name: `twitter:card`,
-          content: `summary`,
+          property: `og:url`,
+          content: site.siteMetadata.siteUrl + slug,
+        },
+        {
+          property: `og:type`,
+          content: `website`,
         },
         {
           name: `twitter:creator`,
@@ -72,6 +78,14 @@ const SEO = ({ description, lang, meta, title, thumbnail }) => {
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          name: `twitter:image`,
+          content: site.siteMetadata.siteUrl + thumbnailSrc,
+        },
+        {
+          name: `twitter:card`,
+          content: `summary`,
         },
       ].concat(meta)}
     />

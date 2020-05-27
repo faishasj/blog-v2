@@ -10,14 +10,15 @@ import { rhythm, scale } from "../utils/typography"
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
-  const { previous, next } = pageContext
+  const { slug, previous, next } = pageContext
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
-        thumbnail={post.frontmatter.thumbnail ? post.frontmatter.thumbnail.childImageSharp.fluid.src : ""}
+        thumbnail={post.frontmatter.thumbnail}
+        slug={slug}
       />
       <article>
         <header>
@@ -107,11 +108,12 @@ export const pageQuery = graphql`
         description
         thumbnail {
           childImageSharp {
-            fluid(maxWidth: 1200) {
+            fluid(maxWidth: 500) {
               ...GatsbyImageSharpFluid
-              src
             }
-            
+            sizes(maxWidth: 600) {
+              ...GatsbyImageSharpSizes
+            }
           }
         }
         thumbnail_invertable

@@ -50,7 +50,6 @@ const BlogIndex = ({ data, location }) => {
                 dangerouslySetInnerHTML={{
                   __html: node.excerpt,
                 }}
-                {...console.log(node.excerpt)}
               />
             </section>
             <Link to={node.fields.slug}>Read more →</Link>

@@ -6,8 +6,6 @@ import SEO from "../components/seo"
 
 
 const NotFoundPage = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
-
   return (
     <Layout>
       <SEO title="404: Not Found" />

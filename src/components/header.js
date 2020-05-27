@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { rhythm, scale } from "../utils/typography"
+import { scale } from "../utils/typography"
 
 import ThemeSwitch from './theme-switch'
 
@@ -37,8 +37,8 @@ const Header = () => {
         <div className="siteDescription">{data.site.siteMetadata.description}</div>
       </div>
       <div className="siteNavigation">
-        <Link>About Me</Link>
-        <Link>Projects</Link>
+        <Link to={`/`}>About Me</Link>
+        <Link to={`/`}>Projects</Link>
         <ThemeSwitch/>
       </div>
     </header>

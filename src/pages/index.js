@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import Img from 'gatsby-image'
-import { rhythm, scale } from "../utils/typography"
+import { rhythm } from "../utils/typography"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -18,6 +18,7 @@ const BlogIndex = ({ data, location }) => {
       <Bio />
       <h1 className="postsHeading">Recent posts</h1>
       {posts.map(({ node }) => {
+        console.log(node.fields.slug)
         const title = node.frontmatter.title || node.fields.slug
         return (
           <article className="postPreviewArticle" key={node.fields.slug}>

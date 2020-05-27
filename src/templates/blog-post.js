@@ -18,7 +18,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
         thumbnail={post.frontmatter.thumbnail}
-        slug={slug || ''}
+        slug={slug}
       />
       <article>
         <header>

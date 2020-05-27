@@ -14,7 +14,7 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle} description={data.site.siteMetadata.description}>
-      <SEO title="All posts" />
+      <SEO/>
       <Bio />
       <h1 className="postsHeading">Recent posts</h1>
       {posts.map(({ node }) => {

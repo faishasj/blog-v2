@@ -36,16 +36,19 @@ const SEO = ({ description, lang, meta, slug, title, thumbnail }) => {
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      {...(title ? 
+        {
+          titleTemplate: `%s | ${site.siteMetadata.title}`,
+          title,
+        } : 
+        {
+          title: site.siteMetadata.title,
+        }
+      )}
       meta={[
         {
           name: `description`,
           content: metaDescription,
-        },
-        { 
-          name: `image`,
-          content: site.siteMetadata.siteUrl + thumbnailSrc,
         },
         {
           property: `og:title`,
@@ -54,10 +57,6 @@ const SEO = ({ description, lang, meta, slug, title, thumbnail }) => {
         {
           property: `og:description`,
           content: metaDescription,
-        },
-        {
-          property: `og:image`,
-          content: site.siteMetadata.siteUrl + thumbnailSrc,
         },
         {
           property: `og:url`,
@@ -80,14 +79,27 @@ const SEO = ({ description, lang, meta, slug, title, thumbnail }) => {
           content: metaDescription,
         },
         {
-          name: `twitter:image`,
-          content: site.siteMetadata.siteUrl + thumbnailSrc,
-        },
-        {
           name: `twitter:card`,
           content: `summary`,
         },
-      ].concat(meta)}
+      ].concat(
+        thumbnail ?
+        [
+          { 
+            name: `image`,
+            content: site.siteMetadata.siteUrl + thumbnailSrc,
+          },
+          {
+            property: `og:image`,
+            content: site.siteMetadata.siteUrl + thumbnailSrc,
+          },
+          {
+            name: `twitter:image`,
+            content: site.siteMetadata.siteUrl + thumbnailSrc,
+          },
+        ] : []
+      )
+      .concat(meta)}
     />
   )
 }
@@ -96,6 +108,7 @@ SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
+  slug: ``,
 }
 
 SEO.propTypes = {
@@ -104,6 +117,7 @@ SEO.propTypes = {
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
   image: PropTypes.string,
+  slug: PropTypes.string,
 }
 
 export default SEO
